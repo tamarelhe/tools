@@ -1,0 +1,1 @@
+docker run --rm -v $(pwd):/app/csv csvimportersqlite -p /app/csv -f -s ";" -n "stocks_database"
