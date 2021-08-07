@@ -1,4 +1,4 @@
-# CSV IMPORTER TO SQLITE Database
+# CSV Importer to SQLite Database
 
 ### Arguments:
 * -f --force: Recreate database if it exists
@@ -8,4 +8,4 @@
 
 
 ### Docker Run
-docker run --rm -v $(pwd):/app/csv csvimportersqlite -p /app/csv -f -s ";" -n "stocks_database"
+docker run --rm -v $(pwd):/app/csv csvimportersqlite -p /app/csv -f -s ";" -n "example_database"
