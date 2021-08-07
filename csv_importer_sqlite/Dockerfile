@@ -4,8 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-RUN mkdir -p ./csv
 
 COPY csv_importer_sqlite.py .
 
-ENTRYPOINT ["python","./csv_importer_sqlite.py -p ./csv"]
+ENTRYPOINT ["python","./csv_importer_sqlite.py"]
