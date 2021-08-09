@@ -10,11 +10,8 @@ def create_database(dbFilePath, force):
     if (os.path.isfile(dbFilePath)):
         if (force):
            os.remove(dbFilePath)
-        else:
-            print("The database file already exists: " + dbFilePath)
-            sys.exit(1)
-
-    Path(dbFilePath).touch()
+    else:        
+        Path(dbFilePath).touch()
 
 
 def check_if_table_exists(cursor, tableName):
