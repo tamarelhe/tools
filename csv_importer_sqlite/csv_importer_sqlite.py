@@ -34,9 +34,12 @@ def import_csv_to_db (conn, cursor, path, force, separator):
         if (filename.lower().endswith('.csv')):
             f = os.path.join(path, filename)            
             if os.path.isfile(f):
+                #dtype={"user_id": int, "username": "string"}
                 csvHeader = pd.read_csv(f, sep=separator, encoding='utf8', nrows=0, header=0, skipinitialspace=True) # load to DataFrame
-                csvHeader.columns = csvHeader.columns.str.replace(' ', '')
+                csvHeader.columns = csvHeader.columns.str.replace(' ', '')                
                 columnsCreateTable = ' text, '.join(csvHeader.columns.tolist()) + ' text'
+                #columnsDType = ': "string", '.join(csvHeader.columns.tolist()) + ': "string'
+                #print("columnsDType: "+columnsDType)
                 tableName = os.path.splitext(os.path.basename(f))[0]                
 
                 if(check_if_table_exists(cursor, tableName)):
@@ -44,9 +47,8 @@ def import_csv_to_db (conn, cursor, path, force, separator):
                         drop_table(cursor, tableName)                        
                         create_table(cursor, tableName, columnsCreateTable)
                     else:
-                        print("The table already exists: " + tableName)
-                        conn.close()
-                        sys.exit(1)
+                        print("The table already exists: " + tableName + ". Skipping...")
+                        continue
                 else:
                     create_table(cursor, tableName, columnsCreateTable)
                                 
